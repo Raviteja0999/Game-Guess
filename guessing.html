@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./guess.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Guessing Game</title>
+</head>
+
+<body id="bod">
+    <section style="display: grid; grid-template-columns: repeat(2,1fr);">
+        <input type="button" value="Again !" id="again">
+        <p id="bet">( Between 1 and 20 )</p>
+    </section>
+
+    <!-- h1 -->
+    <h1>Guess My Number !</h1>
+
+    <section>
+        <div id="line"></div>
+        <div id="result"></div>
+    </section>
+
+    <section id="secinter">
+        <input type="number" name="" id="numberinput" placeholder="Please Enter The Number"><br>
+        <input type="button" name="" id="chkbutton" value="Check !">
+    </section>
+
+
+    <section id="score">
+        <p id="win">Start guessing....</p>
+        <div>
+            <p><i class="fa-solid fa-star" style="color:red;"></i>Score: <span id="scrp"></span></p>
+            <p><i class="fa-solid fa-medal" style="color:gold;"></i>High Score:<span id="hscore"></span></p>
+        </div>
+    </section>
+
+    <script>
+        
+        document.getElementById("result").innerHTML = "?";
+
+        
+        var butn = document.getElementById("chkbutton");
+
+        let rand = Math.floor(Math.random() * 20) + 1;
+
+        console.log(rand);
+
+        let strtnum = 20;
+
+        butn.addEventListener("click", () => {
+            
+            if (strtnum > 0) {
+                document.getElementById("scrp").innerHTML = strtnum;
+                strtnum = strtnum - 1;
+            }
+            let inp = document.querySelector("#numberinput").value;
+            let taknum = Number(inp);
+            if (taknum == rand) {
+                document.querySelector("#bod").style.backgroundColor = "green";
+                document.getElementById("win").innerHTML = "Hey you won the game &#128515;";
+                document.getElementById("hscore").innerHTML = strtnum + 1;
+                document.getElementById("result").innerHTML = rand;
+            }
+
+            if (taknum !== rand) {
+                document.getElementById("result").innerHTML = "?";
+            }
+
+            if (taknum > rand) {
+                document.getElementById("win").innerHTML = "To high"
+            }
+
+            if (taknum < rand) {
+                document.getElementById("win").innerHTML = "To Low"
+            }
+
+            if (strtnum < 1) {
+                document.getElementById("win").innerHTML = "Game over ......";
+                document.getElementById("numberinput").style.display = "none";
+            }
+        })
+
+        var agbtn = document.getElementById("again");
+        agbtn.addEventListener("click", () => {
+
+            strtnum =20;
+            document.getElementById("scrp").innerHTML = strtnum;
+            document.querySelector("#bod").style.backgroundColor = "black";
+            document.getElementById("result").innerHTML = "?";
+            document.getElementById("win").innerHTML = "Start game again...";
+            document.getElementById("numberinput").style.display = "block";
+
+            rand = Math.floor(Math.random() * 20) + 1;
+            console.log(rand);
+        })
+
+    </script>
+
+</body>
+
+</html>
